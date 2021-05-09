@@ -31,7 +31,6 @@ const LayoutHeaderNavigation = () => {
       <Container>
         <NavbarBrand>
           <Link to={routes.ROOT}>
-            <img src={drivingLicenseLogo} className='logo-icon' alt='logo'/>
             <img src={companyNameLogo} className='logo-name' alt='logo-name'/>
           </Link>
         </NavbarBrand>
