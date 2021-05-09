@@ -5,7 +5,6 @@ import {routes} from 'constants/routes'
 import 'components/layout/header/navigation/Navigation.scss'
 import AppContext from 'context/app';
 import UserLogout from 'components/user/logout/Logout';
-import drivingLicenseLogo from 'assets/images/icons/driving-license.svg';
 import companyNameLogo from 'assets/images/icons/company-name.png';
 
 /**
@@ -58,7 +57,7 @@ const LayoutHeaderNavigation = () => {
                   <Nav.Link as={NavLink} activeClassName='is-active' to={routes.APPLICANT_LOGIN}>Get Verified and Start Distributing Today!</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link as={NavLink} activeClassName='is-active' to={routes.ISSUER_LOGIN}>Admin</Nav.Link>
+                  <Nav.Link as={NavLink} activeClassName='is-active' to={routes.ISSUER_LOGIN}>Issuer</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                   <Nav.Link as={NavLink} activeClassName='is-active' to={routes.API_KEY}>API Key</Nav.Link>
