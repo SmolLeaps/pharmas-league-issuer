@@ -4,7 +4,7 @@ import {Button} from 'react-bootstrap';
 import ApiService from 'utils/apiService';
 import { routes } from 'constants/routes';
 import firebase from 'utils/firebase/firebase';
-import {drivingLicenseVCData} from 'utils/vc-data-examples/drivinglicense';
+import {pharmaceuticalIdVCData} from 'utils/vc-data-examples/pharmaceutical_id';
 import { sendEmail } from 'utils/templates/email';
 
 interface IProps {
@@ -13,7 +13,7 @@ interface IProps {
 }
 
 const ApplicationInfoPage: React.FC<IProps & RouteComponentProps> = (props: IProps): React.ReactElement => {
-  const [VCschemaData] = useState<any>(JSON.stringify(drivingLicenseVCData));
+  const [VCschemaData] = useState<any>(JSON.stringify(pharmaceuticalIdVCData));
 
   const { username, payload, applicationID, docID, approved } = props.location.state.state;
   const { givenName, familyName, holderDid, idClass, issueDate} = payload;
