@@ -84,8 +84,6 @@ const ApplicationInfoPage: React.FC<IProps & RouteComponentProps> = (props: IPro
         <p><strong>Date of Issuance:</strong> {issueDate}</p>
         <p><strong>Issuer Organisation:</strong> {issuerOrganization}</p>
         <p><strong>Country of Issuance:</strong> {country}</p>
-        <Button style={{display: 'block', margin: '10px 0 0 0'}}>View Proof of Document</Button>
-
         { !approved ? (
           <>
            <Button style={{display: 'block', margin: '10px 0 0 0'}} onClick={approveVC}>Approve</Button>
