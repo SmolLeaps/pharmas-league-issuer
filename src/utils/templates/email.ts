@@ -15,9 +15,9 @@ export const sendEmail = (qrCode: string, sharingUrl: string, receiver_email: st
     
     const redirectUrl: string = `${config.wallet_url}/accept-credentials?vcURL=${sharingUrl}`
 
-    let ses_mail = "From: 'StartUpA Driving License Issuer' <" + sender_email + ">\n";
+    let ses_mail = "From: 'Pharma's League Marketplace' <" + sender_email + ">\n";
     ses_mail = ses_mail + "To: " + receiver_email + "\n";
-    ses_mail = ses_mail + "Subject: Driving License VC Approval\n";
+    ses_mail = ses_mail + "Subject: Your Verifiable Credential on Pharma's League has been created \n";
     ses_mail = ses_mail + "MIME-Version: 1.0\n";
     ses_mail = ses_mail + "Content-Type: multipart/mixed; boundary=\"NextPart\"\n\n";
     ses_mail = ses_mail + "--NextPart\n";
@@ -25,8 +25,8 @@ export const sendEmail = (qrCode: string, sharingUrl: string, receiver_email: st
     ses_mail = ses_mail + "<html>\n\n";
     ses_mail = ses_mail + "<body>\n\n";
     ses_mail = ses_mail + "<h2>Your application for verifiable credentials has been approved.</h2>\n\n";
-    ses_mail = ses_mail + "<p>You can retrieve and store your verifiable credentials through the link provided.</p>\n\n";
-    ses_mail = ses_mail + "<p>Link: <a href='" + redirectUrl + "'>Sharing URL</a></p>\n\n";
+    ses_mail = ses_mail + "<p>You may npw retrieve and store your verifiable credentials through the link below!</p>\n\n";
+    ses_mail = ses_mail + "<p>Link: <a href='" + redirectUrl + "'>Here</a></p>\n\n";
     ses_mail = ses_mail + "</body>\n\n";
     ses_mail = ses_mail + "</html>\n\n";
 

@@ -54,7 +54,7 @@ const LayoutHeaderNavigation = () => {
             {!appState.isAuthenticated && (
               <>
                 <Nav.Item>
-                  <Nav.Link as={NavLink} activeClassName='is-active' to={routes.APPLICANT_LOGIN}>Holder</Nav.Link>
+                  <Nav.Link as={NavLink} activeClassName='is-active' to={routes.APPLICANT_LOGIN}>Register as Holder</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
                   <Nav.Link as={NavLink} activeClassName='is-active' to={routes.ISSUER_LOGIN}>Issuer</Nav.Link>
