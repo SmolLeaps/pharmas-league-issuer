@@ -69,7 +69,7 @@ const Application: React.FC = (): React.ReactElement => {
           const db = firebase.firestore();
           db.collection('drug-license-waiting-approval').add({username: appState.username, payload, applicationID, approved: false})
           console.log(payload);
-          alert('You have successfully submitted your application.');
+          alert('You have successfully submitted your application. You will receive an email to your Verifiable Credential once approved by the Issuer');
         } catch (error) {
             ApiService.alertWithBrowserConsole(error.message);
         }
