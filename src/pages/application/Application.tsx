@@ -7,15 +7,14 @@ import firebase from 'utils/firebase/firebase';
 import randomstring from 'randomstring';
 
 interface IBaseVCData {
-    givenName: string;
-    familyName: string;
+    givenName: string; //company name
+    familyName: string; //unused, since we are treat each indiv credential as an organisation credential
     issueDate: string;
   }
   
   interface IExtendVCData {
-    drivingLicenseID: string;
-    country: string;
-    drivingClass: string;
+    companyID: string;
+    countryCode: string;
     email: string;
     issuerOrganization: string;
   }
@@ -27,15 +26,14 @@ interface IBaseVCData {
   }
   
   const defaultExtendVCData: IExtendVCData = {
-    drivingLicenseID: '',
-    country: 'Singapore',
-    drivingClass: '1',
+    companyID: '',
+    countryCode: '',
     email: '',
-    issuerOrganization: 'Automobile Association of Singapore'
+    issuerOrganization: 'Pfizer'
   }
 
 interface IPayload extends IBaseVCData{
-  idClass: string;
+  idClass: string; //stringifiedCredentials, workaround
   holderDid: string
 }
 
@@ -43,20 +41,21 @@ const Application: React.FC = (): React.ReactElement => {
     const {appState} = useContext(AppContext);
     const [inputDID, setinputDID] = useState(appState.didToken || '')
 
-    const [baseVCData, setBaseVCData] = useState<IBaseVCData>(defaultBaseVCData)
-  
+    //var baseVCData is instantiated as defaultBaseVCData,  has setter setBaseVCData and implements IBaseVCData interface
+    const [baseVCData, setBaseVCData] = useState<IBaseVCData>(defaultBaseVCData) 
+
     const [extendVCData, setExtendVCData] = useState<IExtendVCData>(defaultExtendVCData)
 
     /**
      * Function for issuing an unsigned employment VC.
      * */
-    const issueDrivingLicensePersonVC = async () => {
+    const issueDrugLicensePersonVC = async () => {
         try {
-          const { givenName, familyName, issueDate } = baseVCData;
+          const {  givenName, familyName, issueDate } = baseVCData;
 
-          // Generate a random Affinidi Driving License ID, which will double up as an application ID
+          // Generate a random Affinidi pharmaceutical ID from a list provided from pharmacy manufacturer, which will double up as an application ID
           const applicationID: string = randomstring.generate(10);
-          const vcToStringify = {...extendVCData, affinidiDrivingLicenseID: applicationID}
+          const vcToStringify = {...extendVCData, affinidicompanyID: applicationID}
           
           const payload: IPayload = {
             givenName,
@@ -66,10 +65,10 @@ const Application: React.FC = (): React.ReactElement => {
             holderDid: inputDID || appState.didToken || '',
           }
 
-          // Store unsignedVC into issuer's datsabase
+          // Store unsignedVC into issuer's database. 
           const db = firebase.firestore();
-          db.collection('drivinglicense-waiting-approval').add({username: appState.username, payload, applicationID, approved: false})
-
+          db.collection('drug-license-waiting-approval').add({username: appState.username, payload, applicationID, approved: false})
+          console.log(payload);
           alert('You have successfully submitted your application.');
         } catch (error) {
             ApiService.alertWithBrowserConsole(error.message);
@@ -90,7 +89,6 @@ const Application: React.FC = (): React.ReactElement => {
     const updateExtendBaseVC = (e: any) => {
       setExtendVCData({...extendVCData, [e.target.name]: e.target.value})
     }
-
     return (
       <div className='tutorial'>
         <div className='tutorial__step'>
@@ -100,20 +98,15 @@ const Application: React.FC = (): React.ReactElement => {
             >Clear all fields
           </Button>
 
-          <p><strong>Step 1:</strong>Please fill in details of your driving license</p>
+          <p><strong>Get Verified to Start Listing Your Medication!</strong></p>
           <FormGroup controlId='email'>
-            <FormLabel className='label' style={{margin: '10px 0 0 0'}}>Email Address:</FormLabel>
+            <FormLabel className='label' style={{margin: '10px 0 0 0'}}>Company Email Address:</FormLabel>
             <FormControl name='email' type='text' value={extendVCData.email} onChange={e => updateExtendBaseVC(e)}/>
           </FormGroup>
 
           <FormGroup controlId='givenName'>
-            <FormLabel className='label' style={{margin: '10px 0 0 0'}}>Given Name:</FormLabel>
+            <FormLabel className='label' style={{margin: '10px 0 0 0'}}>Registered Company Name:</FormLabel>
             <FormControl name='givenName' type='text' value={baseVCData.givenName} onChange={e => updateBaseVC(e)}/>
-          </FormGroup>
-
-          <FormGroup controlId='familyName'>
-            <FormLabel style={{margin: '10px 0 0 0'}}>Family Name:</FormLabel>
-            <FormControl name='familyName' type='text' value={baseVCData.familyName} onChange={e => updateBaseVC(e)}/>
           </FormGroup>
 
           <FormGroup controlId='issueDate'>
@@ -121,38 +114,22 @@ const Application: React.FC = (): React.ReactElement => {
             <FormControl name='issueDate' type='text' value={baseVCData.issueDate} onChange={e => updateBaseVC(e)}/>
           </FormGroup>
 
-          <FormGroup controlId='drivingLicense'>
-            <FormLabel style={{margin: '10px 0 0 0'}}>Driving License ID:</FormLabel>
-            <FormControl name='drivingLicenseID' type='text' value={extendVCData.drivingLicenseID} onChange={e => updateExtendBaseVC(e)}/>
+          <FormGroup controlId='drugLicense'>
+            <FormLabel style={{margin: '10px 0 0 0'}}>Issued Pharmaceutical ID:</FormLabel>
+            <FormControl name='companyID' type='text' value={extendVCData.companyID} onChange={e => updateExtendBaseVC(e)}/>
           </FormGroup>
 
-          <FormGroup controlId='drivingClass'>
-            <FormLabel style={{margin: '10px 0 0 0'}}>Driving Class:</FormLabel>
-            <FormControl name='drivingClass' as="select" value={extendVCData.drivingClass} onChange={e => updateExtendBaseVC(e)}>
-              <option>1</option>
-              <option>2</option>
-              <option>2A</option>
-              <option>2B</option>
-              <option>3</option>
-              <option>3A</option>
-              <option>3C</option>
-              <option>3CA</option>
-              <option>4</option>
-              <option>4A</option>
-              <option>5</option>
+          <FormGroup controlId='countryCode'>
+            <FormLabel style={{margin: '10px 0 0 0'}}>Country Code:</FormLabel>
+            <FormControl name='countryCode' as="select" value={extendVCData.countryCode} onChange={e => updateExtendBaseVC(e)}>
+              <option>SG</option>
+              <option>MY</option>
+              <option>ID</option>
             </FormControl>
           </FormGroup>
-
-          <div style={{margin: '30px 0'}}>
-            <p><strong>Step 2:</strong>Upload Proof of Driving License</p>
-            <FormFile id="formcheck-api-regular">
-              <FormFile.Label>Proof of Driving License</FormFile.Label>
-              <FormFile.Input />
-            </FormFile>
-          </div>
           
           <Button 
-            onClick={e => issueDrivingLicensePersonVC()}
+            onClick={e => issueDrugLicensePersonVC()}
             >Submit
           </Button>
         </div>
