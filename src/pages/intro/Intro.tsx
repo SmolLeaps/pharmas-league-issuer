@@ -17,6 +17,10 @@ const IntroPage = () => {
         <h5 className='intro__subheading'>Greater Southeast Asia's Trusted Drug Marketplace</h5>
       </div>
       <div className='intro__text-block'>
+        <h4>Issuer - Holder - Verifier Flow</h4>
+        <img className='flow-size' src={EntireFlow} alt='entire-flow'/>
+      </div>
+      <div className='intro__text-block'>
         <h4>Rise in Counterfeit Drugs Sold Online</h4>
         <p>The ongoing COVID-19 pandemic and the fast-paced world of e-commerce has taken the acceleration of selling pharmaceuticals online to the next level.</p>
         <p>Though 60% of pharmaceutical brands have seen an increase of revenue from their online business, they have suffered an increase of 67% in online counterfeits as a result as well. WHO estimates that counterfeit medicines worth 89 billion are traded annually.</p> 
@@ -24,8 +28,11 @@ const IntroPage = () => {
         <img className='articles-size' src={NewsArticles} alt='entire-flow' />
       </div>
       <div className='intro__text-block'>
-        <h4>Issuer - Holder - Verifier Flow)</h4>
-        <img className='flow-size' src={EntireFlow} alt='entire-flow'/>
+        <h4>Pharma's League's Mission</h4>
+        <p>Counterfeit drugs affect people from poor, underprivileged communities most, where self-medication is most common.</p>
+        <p>Half of the deaths from the current opioid crisis were from the synthetic heroin fentanyl, which was reported to contain counterfeit medications.</p>
+        <p>Hence, we aim to prevent further harm caused towards these communities, by offering a single source of truth for the purchase and reselling of drugs online, where resellers have to be authorized by respective pharmas to resell their drugs. The guarantee of trust between buyers and sellers would also enforce a more efficient pharma market.</p>
+        <p>Pharma's League: a 100% trustworthy platform for drugs.</p>
       </div>
       {/* <div className='intro__roles-description'>
         <div className='intro__roles-description-role'>
