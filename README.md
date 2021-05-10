@@ -116,7 +116,7 @@ REACT_APP_WALLET_URL=http://localhost:3001
 
 #### Sequence
 
-Run the Issuer Repository, then the Holder Repository, then lastly the Verifier Repository.
+Run the [Issuer Repository](https://github.com/SmolLeaps/pharmas-league-issuer), then the [Holder Repository](https://github.com/SmolLeaps/pharmas-league-holder), then lastly the [Verifier Repository](https://github.com/SmolLeaps/pharmas-league-verifier).
 
 ## Roadmap
 
