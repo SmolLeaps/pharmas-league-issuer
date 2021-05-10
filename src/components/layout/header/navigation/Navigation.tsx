@@ -35,7 +35,7 @@ const LayoutHeaderNavigation = () => {
         </NavbarBrand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className={showNavbar ? 'show' : ''}>
-          <Nav className="justify-content-end">
+          <Nav className="justify-content-end navbar-nav">
             {appState.isAuthenticated && (
               <>
                 <Nav.Item>
@@ -54,14 +54,14 @@ const LayoutHeaderNavigation = () => {
             {!appState.isAuthenticated && (
               <>
                 <Nav.Item>
-                  <Nav.Link as={NavLink} activeClassName='is-active' to={routes.APPLICANT_LOGIN}>Register as Holder</Nav.Link>
+                  <Nav.Link as={NavLink} activeClassName='is-active' to={routes.APPLICANT_LOGIN}>Login as Reseller</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link as={NavLink} activeClassName='is-active' to={routes.ISSUER_LOGIN}>Issuer</Nav.Link>
+                  <Nav.Link as={NavLink} activeClassName='is-active' to={routes.ISSUER_LOGIN}>Login as Pharma Company</Nav.Link>
                 </Nav.Item>
-                <Nav.Item>
+                {/* <Nav.Item>
                   <Nav.Link as={NavLink} activeClassName='is-active' to={routes.API_KEY}>API Key</Nav.Link>
-                </Nav.Item>
+                </Nav.Item> */}
               </>
             )}
           </Nav>

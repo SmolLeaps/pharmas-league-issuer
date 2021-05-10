@@ -14,8 +14,8 @@ const signUpSubComponent = (
 
 const logInSubComponent = (
     <>
-      <h1 className='title'>Applicant Login</h1>
-      <p>Please log in using Affindi Wallet's credentials.</p>
+      <h1 className='title'>Reseller Login (Holder)</h1>
+      <p>Please log in with your Affindi Wallet credentials.</p>
       <ApplicantLogin/>
     </>
 )
@@ -27,7 +27,7 @@ const ApplicantLoginPage: React.FC = (): React.ReactElement => {
     return (
         <div className='page-form page-form--slim'>
             { showSignUp ? signUpSubComponent : logInSubComponent }
-            { showSignUp ? <small>Already have an Affinidi Wallet account?<a href='#' onClick={() => setShowSignUp(false)}> Log in here </a></small>: <small>Don't have an Affinidi Wallet account?<a href='#' onClick={() => setShowSignUp(true)}> Sign up here </a></small>}
+            { showSignUp ? <small>Already have an Affinidi Wallet account?<a href='#' onClick={() => setShowSignUp(false)}> Log in here </a></small>: <small>Don't have an Affinidi Wallet account?<a href='#' onClick={() => setShowSignUp(true)}> Sign up here! </a></small>}
         </div>
     )
 }
